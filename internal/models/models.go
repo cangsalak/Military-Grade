@@ -125,7 +125,7 @@ type SystemConfig struct {
 	MatrixName            string    `gorm:"default:'ARMOR-X1 COMMAND'" json:"matrix_name"`
 	SupportEmail          string    `gorm:"default:'support@armor-x1.local'" json:"support_email"`
 	PublicGatewayIP       string    `gorm:"default:'127.0.0.1'" json:"public_gateway_ip"`
-	InternalSubnet        string    `gorm:"default:'10.8.0.0/22'" json:"internal_subnet"`
+	InternalSubnet        string    `gorm:"default:'10.9.0.0/22'" json:"internal_subnet"`
 	DNSFilteringActive    bool      `gorm:"default:false" json:"dns_filtering_active"`
 	PiHoleAddress         string    `gorm:"default:'127.0.0.1'" json:"pihole_address"`
 	StealthAPNActive      bool      `gorm:"default:false" json:"stealth_apn_active"`

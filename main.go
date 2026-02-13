@@ -42,7 +42,7 @@ func main() {
 	}
 
 	// 2. Init IPAM
-	ipam, err := internal.NewIPAM("10.8.0.0/22")
+	ipam, err := internal.NewIPAM("10.9.0.0/22")
 	if err != nil {
 		log.Fatalf("Failed to init IPAM: %v", err)
 	}

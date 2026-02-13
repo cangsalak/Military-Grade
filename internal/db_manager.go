@@ -2,11 +2,13 @@ package internal
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/max_kai/military-grade-wg/internal/models"
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -15,7 +17,14 @@ type DBManager struct {
 }
 
 func NewDBManager(dsn string) (*DBManager, error) {
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+	var dialector gorm.Dialector
+	if strings.HasSuffix(dsn, ".db") {
+		dialector = sqlite.Open(dsn)
+	} else {
+		dialector = postgres.Open(dsn)
+	}
+
+	db, err := gorm.Open(dialector, &gorm.Config{
 		PrepareStmt: true, // Cache prepared statements for speed
 	})
 	if err != nil {
