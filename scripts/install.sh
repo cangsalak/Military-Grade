@@ -20,8 +20,12 @@ echo -e "${YELLOW}Phase 1: Environment Hardening & Pre-requisites${NC}"
 
 # 1. Update & Dependencies
 if [ -f /etc/debian_version ]; then
+    echo -e "${BLUE}[INFO] Configuring NodeSource Tactical Repository (Node v20)...${NC}"
+    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
     sudo apt update && sudo apt install -y wireguard nftables curl git build-essential nginx nodejs npm
 elif [ -f /etc/redhat-release ]; then
+    echo -e "${BLUE}[INFO] Configuring NodeSource Tactical Repository (Node v20)...${NC}"
+    curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
     sudo yum update -y && sudo yum install -y wireguard-tools nftables curl git nginx nodejs npm
 fi
 
