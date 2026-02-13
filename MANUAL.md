@@ -30,11 +30,9 @@ bash scripts/install.sh
 
 เมื่อติดตั้งเสร็จ ระบบจะเข้าสู่โหมด **Interactive Setup Wizard** ใน Terminal:
 
-1.  **Organization:** ระบุชื่อหน่วยงาน/องค์กรของคุณ
-2.  **Commander Identity:** ตั้งค่า Username และ Password ระดับสูงสุด (Root)
-3.  **Deployment Role:** 
-    *   **Primary Command Unit:** เครื่องหลักที่ควบคุมโครงข่ายทั้งหมด
-    *   **Satellite Edge Unit:** เครื่องลูกที่ทำหน้าที่เป็นจุดรับส่งสัญญาณปลายทาง
+1.  **Web Genesis Wizard:** เมื่อติดตั้งเสร็จ ให้เข้าหน้าเว็บที่พอร์ต **80** ระบบจะพาวิ่งเข้าหน้า Setup อัตโนมัติ
+2.  **Identity Formation:** กำหนดชื่อองค์กร และสร้างบัญชี ROOT ในหน้าเว็บ
+3.  **Command Hub:** เมื่อตั้งค่าเสร็จ ระบบจะปลดล็อกหน้า Dashboard หลักทันที
 
 ---
 

@@ -34,21 +34,11 @@ func main() {
 		log.Fatalf("Failed to init DB: %v", err)
 	}
 
-	// CHECK FOR CLI SETUP
+	// CHECK FOR SYSTEM INITIALIZATION
 	var userCount int64
 	db.DB.Model(&models.User{}).Count(&userCount)
-
-	// If --setup flag exists or no users found
-	isSetup := false
-	for _, arg := range os.Args {
-		if arg == "--setup" {
-			isSetup = true
-			break
-		}
-	}
-
-	if userCount == 0 || isSetup {
-		internal.InteractiveSetup(db)
+	if userCount == 0 {
+		logger.Warn("SYSTEM_UNINITIALIZED: Strategic Matrix is awaiting Web Genesis. Access Command Portal to begin setup.")
 	}
 
 	// 2. Init IPAM

@@ -68,13 +68,7 @@ if ! command -v go &> /dev/null; then
     sudo snap install go --classic
 fi
 
-# 5. Execute Interactive Wizard & Start Services
-echo -e "${GREEN}[READY] Transitioning to Interactive Setup Wizard...${NC}"
-echo ""
-
-# Run the backend with setup flag for initial genesis
-go run main.go --setup
-
+# 5. Build Strategic Assets...
 echo -e "${BLUE}[INFO] Building Strategic Assets...${NC}"
 # Build Backend
 go build -o armor-server main.go

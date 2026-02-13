@@ -47,11 +47,13 @@ cd armor-matrix
 bash scripts/install.sh
 ```
 
-### **2. Strategic Initialization**
-After the script completes, follow the CLI Wizard to:
-1.  Establish your **Organization Genesis**.
-2.  Deploy your **Root Commander Identity**.
-3.  Select the **Node Deployment Role** (Primary or Satellite).
+### **2. Strategic Initialization (Web Genesis)**
+Once the services are live, access the Command Portal at `http://<your-server-ip>`. The system will automatically detect the uninitialized state and present the **ARMOR-X1 Web Genesis Wizard**.
+
+Follow the UI to:
+1.  Establish your **Organization Identity**.
+2.  Deploy your **Root Commander Credentials**.
+3.  Configure your **Strategic Infrastructure Parameters**.
 
 ### **4. Command Interface**
 Access the web-based matrix at:
