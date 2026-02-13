@@ -60,7 +60,13 @@ bash scripts/install.sh
 *   ค่า NAT และ Firewall ที่ตั้งไว้จะถูกเขียนลง Kernel ใหม่อัตโนมัติ
 
 ### **คำสั่งควบคุมที่สำคัญ (CLI):**
-*   **เช็คสถานะระบบ:** `sudo systemctl status armor-backend`
+คุณสามารถควบคุมระบบได้โดยตรงจาก Terminal ด้วยคำสั่ง `armor`:
+*   **เช็คสถานะภาพรวม:** `armor status`
+*   **สั่งปิดเน็ต (Blackout):** `armor outreach blackout on`
+*   **ดูค่าคอนฟิกปัจจุบัน:** `armor config show`
+
+### **การบริหารจัดการ Services:**
+*   **เช็คสถานะ Service:** `sudo systemctl status armor-backend`
 *   **ดูบันทึกเหตุการณ์:** `sudo journalctl -u armor-backend -f`
 *   **รีสตาร์ทระบบ:** `sudo systemctl restart armor-backend armor-frontend`
 

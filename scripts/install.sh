@@ -79,6 +79,11 @@ echo -e "${BLUE}[INFO] Building Strategic Assets...${NC}"
 # Build Backend
 go build -o armor-server main.go
 
+# Build Strategic CLI
+echo -e "${BLUE}[INFO] Fabricating Strategic CLI Command Unit...${NC}"
+go build -o armor cmd/armor/main.go
+sudo ln -sf $(pwd)/armor /usr/local/bin/armor
+
 # Build Frontend
 cd portal && npm install && npm run build
 cd ..
