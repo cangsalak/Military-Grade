@@ -1,0 +1,55 @@
+services:
+  app:
+    build: .
+    container_name: wg-armor-controller
+    restart: always
+    ports:
+      - "8080:8080"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - /etc/wireguard:/etc/wireguard
+      - ./logs:/app/logs
+    environment:
+      - DATABASE_URL=postgres://postgres:military_secret@db:5432/wg_db
+      - PORT=8080
+      - WG_INTERFACE=wg0
+      - WG_ENDPOINT=203.0.113.1
+      - GIN_MODE=release
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15-alpine
+    container_name: wg-armor-db
+    restart: always
+    ports:
+      - "5432:5432"
+    shm_size: 128mb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=military_secret
+      - POSTGRES_DB=wg_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

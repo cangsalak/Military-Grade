@@ -1,0 +1,15 @@
+# 🎖️ WIREGUARD INTERFACE TEMPLATE (wg0)
+# DOCUMENT REF: MIL-WG-CONF-V1.0
+# CLASSIFICATION: CONFIDENTIAL
+
+[Interface]
+PrivateKey = {{SERVER_PRIVATE_KEY}}
+Address = 10.8.0.1/24
+ListenPort = 51820
+
+# Post-up: Enabling internal routing without external dependencies
+PostUp = nft add table inet wg_filter && nft add chain inet wg_filter forward { type filter hook forward priority 0; policy accept; }
+PostDown = nft delete table inet wg_filter
+
+# Peers will be managed dynamically via ARMOR-X1 API
+# Do not manually edit this section unless for emergency maintenance
