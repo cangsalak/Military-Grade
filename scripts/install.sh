@@ -20,9 +20,16 @@ echo -e "${YELLOW}Phase 1: Environment Hardening & Pre-requisites${NC}"
 
 # 1. Update & Dependencies
 if [ -f /etc/debian_version ]; then
+    echo -e "${BLUE}[INFO] Performing Deep Package Repair (Strategic Fix)...${NC}"
+    sudo dpkg --configure -a || true
+    sudo apt install -f -y || true
+    echo -e "${BLUE}[INFO] Purging Conflicting Node Assets (Cleanup Phase)...${NC}"
+    sudo apt remove -y nodejs npm nodejs-doc 2>/dev/null || true
+    sudo apt autoremove -y 2>/dev/null || true
+    
     echo -e "${BLUE}[INFO] Configuring NodeSource Tactical Repository (Node v20)...${NC}"
     curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-    sudo apt update && sudo apt install -y wireguard nftables curl git build-essential nginx nodejs npm
+    sudo apt update && sudo apt install -y wireguard nftables curl git build-essential nginx nodejs
 elif [ -f /etc/redhat-release ]; then
     echo -e "${BLUE}[INFO] Configuring NodeSource Tactical Repository (Node v20)...${NC}"
     curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
