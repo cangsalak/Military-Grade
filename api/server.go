@@ -10,6 +10,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -1239,10 +1240,20 @@ func (s *Server) getUserConfig(c *gin.Context) {
 	s.wg.SyncPeer("wg0", pub, []string{peer.AssignedIP + "/32"})
 
 	// 5. Build Final Payload
-	serverPubKey, _ := s.wg.GetPublicKey("wg0")
+	serverPubKey, err := s.wg.GetPublicKey("wg0")
+	if err != nil || strings.Contains(serverPubKey, "SERVER_MODE_PUBKEY") {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "Primary Node (wg0) is not yet active. Please register your Primary Node first."})
+		return
+	}
+
 	endpoint := os.Getenv("WG_ENDPOINT")
 	if endpoint == "" {
-		endpoint = "127.0.0.1"
+		// Attempt to use the host from the request if it's an IP
+		host := c.Request.Host
+		if strings.Contains(host, ":") {
+			host, _, _ = net.SplitHostPort(host)
+		}
+		endpoint = host
 	}
 
 	config := fmt.Sprintf(`[Interface]
