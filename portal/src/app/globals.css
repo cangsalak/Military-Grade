@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+}
+
+:root {
+  /* Clean Material Design Theme */
+  --background: #fafafa;
+  --foreground: #18181b;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #2563eb;
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Clean Dark Theme */
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #3b82f6;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-thai), var(--font-outfit), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+/* Card Styles - Clean & Elevated */
+.card-premium {
+  @apply bg-card text-card-foreground rounded-xl border border-border shadow-sm;
+  transition: all 0.2s ease;
+}
+
+.card-premium:hover {
+  @apply shadow-md;
+}
+
+/* Button Styles - Material Design */
+.btn-primary {
+  @apply bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-primary/90 active:scale-95;
+  @apply transition-all duration-200;
+  @apply shadow-sm hover:shadow;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-secondary/80 active:scale-95;
+  @apply transition-all duration-200;
+  @apply border border-border;
+}
+
+.btn-ghost {
+  @apply bg-transparent text-foreground px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-accent hover:text-accent-foreground active:scale-95;
+  @apply transition-all duration-200;
+}
+
+/* Input Styles - Clean & Minimal */
+.input-field {
+  @apply bg-background border border-input rounded-lg px-3 py-2;
+  @apply text-foreground placeholder:text-muted-foreground;
+  @apply focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent;
+  @apply transition-all duration-200;
+}
+
+/* Badge Styles */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  @apply transition-all duration-200;
+}
+
+.badge-primary {
+  @apply bg-primary/10 text-primary border border-primary/20;
+}
+
+.badge-success {
+  @apply bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20;
+}
+
+.badge-warning {
+  @apply bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20;
+}
+
+.badge-error {
+  @apply bg-destructive/10 text-destructive border border-destructive/20;
+}
+
+/* Table Styles - Clean & Organized */
+.table-container {
+  @apply overflow-x-auto rounded-lg border border-border;
+}
+
+.table-header {
+  @apply bg-muted/50 text-muted-foreground text-xs font-medium uppercase tracking-wider;
+}
+
+.table-row {
+  @apply border-b border-border hover:bg-muted/30 transition-colors;
+}
+
+/* Sidebar Styles */
+.sidebar-item {
+  @apply flex items-center gap-3 px-3 py-2 rounded-lg;
+  @apply text-muted-foreground hover:text-foreground hover:bg-accent;
+  @apply transition-all duration-200 cursor-pointer;
+}
+
+.sidebar-item.active {
+  @apply bg-primary text-primary-foreground;
+  @apply shadow-sm;
+}
+
+/* Status Indicators */
+.status-dot {
+  @apply w-2 h-2 rounded-full;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-online {
+  @apply bg-emerald-500;
+}
+
+.status-offline {
+  @apply bg-gray-400;
+}
+
+.status-warning {
+  @apply bg-amber-500;
+}
+
+.status-error {
+  @apply bg-destructive;
+}
+
+/* Loading Spinner */
+.spinner {
+  @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Utility Classes */
+.text-balance {
+  text-wrap: balance;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom Scrollbar */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
