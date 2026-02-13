@@ -11,6 +11,7 @@ import (
 	"github.com/max_kai/military-grade-wg/internal"
 	"github.com/max_kai/military-grade-wg/internal/models"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 func main() {
@@ -67,11 +68,14 @@ func main() {
 
 	// 6. Strategic Persistence: Re-apply global network parameters on boot
 	var sysConfig models.SystemConfig
-	if err := db.DB.First(&sysConfig).Error; err == nil {
+	result := db.DB.First(&sysConfig)
+	if result.Error == nil {
 		logger.Info("BOOT_SYNC: Re-applying strategic outreach parameters to kernel")
 		if err := wg.ApplySystemConfig(sysConfig); err != nil {
 			logger.Error("BOOT_SYNC_FAILED: Could not re-apply network strategy", zap.Error(err))
 		}
+	} else if result.Error != gorm.ErrRecordNotFound {
+		logger.Error("BOOT_SYNC_DB_ERROR: Could not query network strategy", zap.Error(result.Error))
 	}
 
 	fmt.Printf("\nServer starting on :%s\n", port)
